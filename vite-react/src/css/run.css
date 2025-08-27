@@ -35,3 +35,146 @@
   width:100%;
   height:auto;           /* 圖片等比例縮放 */
 }
+
+
+
+
+
+/* 第一部分：兩欄（左圖右文） */
+.section-hero { padding: 56px 0; background:#fff; }
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr; /* 左大右小 */
+  gap: 28px;
+  align-items: start;               /* 兩欄頂對齊 */
+}
+
+/* 左：圖片 */
+.hero-photo img{
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  display:block;
+}
+
+/* 右：文字卡 */
+.hero-text{
+  position:relative;
+  background:#fff;
+  bottom:-200px;     /* 依你的稿調整 */
+  margin-left:-50px; /* 向左疊出來 */
+  padding:50px;
+  font-weight:900;
+  font-size:20px;
+}
+.hero-text h3{
+  margin:0 10px 30px;
+  font-size:36px;
+  font-weight:700;
+  color:#000;
+}
+
+/* 直排「推薦路線 1」 */
+.vlabel{
+  position:absolute;
+  right:200px;
+  top:-200px;
+  display:flex;
+  align-items:center;
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  color:#9ca3af;
+  font-size:48px;
+  letter-spacing:.12em;
+}
+.vlabel p{
+  writing-mode:horizontal-tb;
+  color:#6b7280;
+  font-weight:600;
+  letter-spacing:0;
+  margin-top:0;
+}
+
+/* 右側文字清單 */
+.meta{
+  list-style:none;
+  margin:0; padding:0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px 28px;
+  color:#444;
+  line-height:2;
+}
+
+/* RWD */
+@media (max-width:960px){
+  .hero-grid{ grid-template-columns:1fr; }
+  .vlabel{ right:12px; top:-120px; font-size:32px; }
+  .meta{ grid-template-columns:1fr; }
+}
+
+/* 第二部分：路線總覽（黑帶＋地圖卡） */
+.section-mapArea{
+  --band-h:240px;              /* 黑帶高度變數 */
+  background:#fff; color:#000;
+  padding:56px 0 96px;
+  position:relative;
+}
+
+/* 疊放：黑帶與地圖卡在同一格 */
+.ro-stack{
+  display:grid;
+  grid-template-rows: var(--band-h);
+  place-items:center;
+  position:relative;
+}
+
+/* 黑色資訊帶 */
+.ro-band{
+  grid-area:1/1;
+  width:100%;
+  height:var(--band-h);
+  background:#000;
+}
+.ro-band-inner{
+  height:100%;
+  color:#fff;
+  display:grid;
+  grid-template-columns:1fr;   /* 標題與清單直向堆疊 */
+  align-items:center;
+  gap:28px;
+  padding-inline: 24px;
+  padding-right: calc(720px + 40px); /* 預留地圖區寬度 + 間距 */
+}
+.ro-band-inner h3{
+  margin:60px 20px 0;
+  font-size:36px;
+  font-weight:800;
+  letter-spacing:.01em;
+}
+.ro-meta{
+  list-style:none;
+  margin:0;
+  padding:30px 30px 50px;
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  gap:10px 0;
+  color:#e5e7eb;
+  line-height:2;
+}
+
+/* 地圖卡（靠右） */
+.map-card{
+  grid-area:1/1;
+  justify-self:end;
+  align-self:center;
+  z-index:2;
+  width:720px; height:360px;
+  overflow:hidden;
+  box-shadow:0 20px 40px rgba(0,0,0,.22);
+}
+.map-card img{
+  width:100%; height:100%;
+  object-fit:cover; display:block;
+}
